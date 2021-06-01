@@ -14,7 +14,17 @@ const randomIntegerFromInterval = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
-// start.addEventListener("click", switcher);
+let intervalId = null;
+
+function switcherColors() {
+  const currentColor = colors[randomIntegerFromInterval(0, colors.length-1)];
+  intervalId = setInterval(() => {
+    document.body.style.backgroundColor = currentColor;
+  }, 1000);
+  start.disabled = true;
+}
+
+start.addEventListener("click", switcherColors);
 
 console.log(colors)
 
