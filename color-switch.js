@@ -1,11 +1,4 @@
-export const colors = [
-  '#FFFFFF',
-  '#2196F3',
-  '#4CAF50',
-  '#FF9800',
-  '#009688',
-  '#795548',
-];
+import { colors } from './colors_base.js';
 
 const start = document.querySelector('button[data-action="start"]');
 const stop = document.querySelector('button[data-action="stop"]');
@@ -16,17 +9,19 @@ const randomIntegerFromInterval = (min, max) => {
 
 let intervalId = null;
 
-function switcherColors() {
-  const currentColor = colors[randomIntegerFromInterval(0, colors.length-1)];
+function randomColors() {
+  const currentColor = colors[randomIntegerFromInterval(0, colors.length - 1)];
+  return currentColor;
+};
+
+start.addEventListener("click", () => {
   intervalId = setInterval(() => {
-    document.body.style.backgroundColor = currentColor;
+    document.body.style.backgroundColor = randomColors();
   }, 1000);
   start.disabled = true;
-}
+});
 
-start.addEventListener("click", switcherColors);
-
-console.log(colors)
-
-
-
+stop.addEventListener("click", () => {
+  clearInterval(intervalId);
+  start.disabled = false;
+});
